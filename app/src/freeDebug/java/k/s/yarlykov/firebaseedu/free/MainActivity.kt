@@ -1,9 +1,11 @@
-package k.s.yarlykov.firebaseedu
+package k.s.yarlykov.firebaseedu.free
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import k.s.yarlykov.firebaseedu.App
+import k.s.yarlykov.firebaseedu.R
 import k.s.yarlykov.firebaseedu.entities.User
 
 /**
@@ -29,8 +31,14 @@ class MainActivity : AppCompatActivity() {
 
         db = (application as App).db
 
+        // Добавляем документы в коллекцию
 //        addUsers()
-        readUsers()
+        // Читаем всю коллекцию
+//        readUsers()
+        // Прослушиваем изменения в коллекции и тестируем
+        addCollectionOnChangeListener()
+        addIncognitoUser()
+        addIncognitoUser()
     }
 
     /**
@@ -65,6 +73,10 @@ class MainActivity : AppCompatActivity() {
 
         db.collection(NONSECURE_USERS).document(friend["name"] as String).set(friend)
 
+        addIncognitoUser()
+    }
+
+    private fun addIncognitoUser() {
         val incognito = hashMapOf<String, Any>(
             "name" to "Incognito",
             "age" to 10,
@@ -99,5 +111,30 @@ class MainActivity : AppCompatActivity() {
             }
 
         return users
+    }
+
+    /**
+     * Прослушиваем изменения в коллекции. При добавлении/удалении одного
+     * документа прилетает ВСЯ коллекция !!!
+     */
+    private fun addCollectionOnChangeListener() {
+
+        db
+            .collection(NONSECURE_USERS)
+            .addSnapshotListener { snapshot, exception ->
+
+                if (exception != null) {
+                    Log.d("APP_TAG", exception.toString())
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null) {
+                    for (document in snapshot) {
+                        val user = document.toObject(User::class.java)
+                        Log.d("APP_TAG", user.name)
+                    }
+                }
+            }
+
     }
 }

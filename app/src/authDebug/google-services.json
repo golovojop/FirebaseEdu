@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "75625267999",
+    "firebase_url": "https://fir-edu-ed842.firebaseio.com",
+    "project_id": "fir-edu-ed842",
+    "storage_bucket": "fir-edu-ed842.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75625267999:android:3fbc1ad68c19eb79fae62a",
+        "android_client_info": {
+          "package_name": "k.s.yarlykov.firebaseedu.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75625267999-fjc0fo59dl9lvhnd2118rgjohsvn4ei1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcY7ghcA8P2Sx-yevpSjlXZLXQmw6wRNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75625267999-fjc0fo59dl9lvhnd2118rgjohsvn4ei1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
