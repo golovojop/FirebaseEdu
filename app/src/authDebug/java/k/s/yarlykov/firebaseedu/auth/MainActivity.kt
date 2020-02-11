@@ -3,6 +3,7 @@ package k.s.yarlykov.firebaseedu.auth
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import k.s.yarlykov.firebaseedu.App
 import k.s.yarlykov.firebaseedu.R
@@ -24,12 +25,17 @@ private const val NONSECURE_USERS = "users_auth"
 class MainActivity : AppCompatActivity() {
 
     lateinit var db: FirebaseFirestore
+    lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        db = (application as App).db
+        // DI
+        ((application as App)).also {app ->
+            db = app.db
+            auth = app.auth
+        }
 
         // Добавляем документы в коллекцию
         addUsers()
@@ -39,6 +45,17 @@ class MainActivity : AppCompatActivity() {
         addCollectionOnChangeListener()
         addIncognitoUser()
         addIncognitoUser()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        auth.currentUser?.let{
+            
+
+        }
+
+
     }
 
     /**
@@ -66,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val friend = hashMapOf<String, Any>(
-            "name" to "Leha",
+            "name" to "Leha_auth",
             "age" to 48,
             "email" to "leha@leha"
         )
@@ -78,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addIncognitoUser() {
         val incognito = hashMapOf<String, Any>(
-            "name" to "Incognito",
+            "name" to "Incognito_auth",
             "age" to 10,
             "email" to "Incognito@Incognito"
         )

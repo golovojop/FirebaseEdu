@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">FirebaseEdu</string>
+
+    <string name="hint_login">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="button_action_enter">enter</string>
+    <string name="button_action_exit">exit</string>
+    <string name="ok_message">Successfully</string>
+    <string name="invalid_message">Invalid input</string>
+    <string name="snack_action_retry">RETRY</string>
 </resources>

@@ -18,7 +18,7 @@ import k.s.yarlykov.firebaseedu.entities.User
  * https://stackoverflow.com/questions/46549766/whats-the-difference-between-cloud-firestore-and-the-firebase-realtime-database
  */
 
-private const val NONSECURE_USERS = "users"
+private const val AUTH_USERS = "auth_users"
 
 
 class MainActivity : AppCompatActivity() {
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     private fun readUsers(): List<User> {
         val users = mutableListOf<User>()
 
-        db.collection(NONSECURE_USERS).get()
+        db.collection(AUTH_USERS).get()
             .addOnSuccessListener { snapshot ->
 
                 for (document in snapshot) {

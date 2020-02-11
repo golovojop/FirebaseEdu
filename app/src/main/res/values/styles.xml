@@ -1,11 +1,103 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!-- Custom application theme: DeepOrange-Brown -->
+    <style name="AppThemeDob" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_dob</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_dob</item>
+        <item name="colorAccent">@color/colorAccent_dob</item>
+        <item name="colorSecondary">@color/colorSecondary_dob</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary_dob</item>
+
+    </style>
+    <style name="AppThemeDob.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppThemeDob.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppThemeDob.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!-- Custom application theme: Indigo-Cyan -->
+    <style name="AppThemeIc" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_ic</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_ic</item>
+        <item name="colorAccent">@color/colorAccent_ic</item>
+        <item name="colorSecondary">@color/colorSecondary_ic</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary_ic</item>
+
+    </style>
+    <style name="AppThemeIc.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppThemeIc.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppThemeIc.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!-- Custom application theme: Pink-Gray -->
+    <style name="AppThemePg" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_pg</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_pg</item>
+        <item name="colorAccent">@color/colorAccent_pg</item>
+        <item name="colorSecondary">@color/colorSecondary_pg</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary_pg</item>
+
+    </style>
+    <style name="AppThemePg.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppThemePg.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppThemePg.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+    <!-- Lesson4 NavigationDrawer style -->
+    <style name="AppThemeL4" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_l4</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_l4</item>
+        <item name="colorAccent">@color/colorAccent_l4</item>
+        <item name="colorSecondary">@color/colorSecondary_l4</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary_l4</item>
+    </style>
+    <style name="AppThemeL4.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppThemeL4.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppThemeL4.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+    <!-- BottomSheet style-->
+    <style name="AppShapeAppearance.LargeComponent"
+        parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="CustomTabLayout" parent="Widget.MaterialComponents.TabLayout.Colored">
+        <item name="tabIndicatorColor">@color/tabIndicatorColor</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabPaddingStart">8dp</item>
+        <item name="tabPaddingEnd">8dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
 
 </resources>
