@@ -48,16 +48,39 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonEnter"
+        android:id="@+id/button_sign_up"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="48dp"
-        android:text="@string/button_action_enter"
+        android:text="@string/button_action_sing_up"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toStartOf="@id/button_sign_in"
+        app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_sign_in"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/button_action_sign_in"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+    <!-- Coordinator Layout used to position the SnackBar -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cl_snackbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

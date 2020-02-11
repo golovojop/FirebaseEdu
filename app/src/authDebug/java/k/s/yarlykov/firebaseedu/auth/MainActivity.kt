@@ -1,13 +1,18 @@
 package k.s.yarlykov.firebaseedu.auth
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import k.s.yarlykov.firebaseedu.App
 import k.s.yarlykov.firebaseedu.R
 import k.s.yarlykov.firebaseedu.entities.User
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 /**
  * Подготовка приложения и первый запуск
@@ -19,42 +24,86 @@ import k.s.yarlykov.firebaseedu.entities.User
  * https://stackoverflow.com/questions/46549766/whats-the-difference-between-cloud-firestore-and-the-firebase-realtime-database
  */
 
-private const val NONSECURE_USERS = "users_auth"
-
+private const val AUTH_USERS = "users_auth"
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var db: FirebaseFirestore
-    lateinit var auth : FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // DI
-        ((application as App)).also {app ->
+        ((application as App)).also { app ->
             db = app.db
             auth = app.auth
         }
 
+        button_sign_up.setOnClickListener {
+            signUp()
+        }
+
+        button_sign_in.setOnClickListener {
+            signIn()
+        }
+
         // Добавляем документы в коллекцию
-        addUsers()
+//        addUsers()
         // Читаем всю коллекцию
 //        readUsers()
         // Прослушиваем изменения в коллекции и тестируем
         addCollectionOnChangeListener()
-        addIncognitoUser()
-        addIncognitoUser()
+//        addIncognitoUser()
+//        addIncognitoUser()
     }
 
     override fun onStart() {
         super.onStart()
 
-        auth.currentUser?.let{
-            
-
+        auth.currentUser?.let {
+            showSnackBar("Already authenticated")
         }
+    }
 
+    private fun signIn() {
+//        val email = et_email.text.toString()
+//        val password = et_password.text.toString()
+
+        // Короче, нужно либо вручную создать юзера через Firebase-консоль аппа,
+        // Либо воспользваться методом signUp(). См. ниже
+        val email = "ciscoff@mail.ru"
+        val password = "123123"
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { authResult ->
+                if (authResult.isSuccessful) {
+                    showSnackBar("Authenticated successfully")
+                    addIncognitoUser()
+                    addIncognitoUser()
+
+                } else {
+                    showSnackBar("Sign In Failed", true)
+                }
+            }
+    }
+
+    private fun signUp() {
+//        val email = et_email.text.toString()
+//        val password = et_password.text.toString()
+
+        val email = "ciscoff@ya.ru"
+        val password = "123123"
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { authResult ->
+                if (authResult.isSuccessful) {
+                    showSnackBar("Signed Up successfully")
+                } else {
+                    showSnackBar("Sign Un Failed", true)
+                }
+            }
 
     }
 
@@ -72,14 +121,14 @@ class MainActivity : AppCompatActivity() {
     private fun addUsers() {
 
         val users = listOf(
-            User("Anna_auth", 11, "anna@yakovlera"),
+            User("Anna_auth", 11, "anna@yakovleva"),
             User("Papa_auth", 48, "papa@anna"),
             User("Gosha_auth", 10, "gosha@gosha"),
             User("Masha_auth", 17, "masha@masha")
         )
 
         for (user in users) {
-            db.collection(NONSECURE_USERS).document(user.name).set(user)
+            db.collection(AUTH_USERS).document(user.name).set(user)
         }
 
         val friend = hashMapOf<String, Any>(
@@ -88,7 +137,7 @@ class MainActivity : AppCompatActivity() {
             "email" to "leha@leha"
         )
 
-        db.collection(NONSECURE_USERS).document(friend["name"] as String).set(friend)
+        db.collection(AUTH_USERS).document(friend["name"] as String).set(friend)
 
         addIncognitoUser()
     }
@@ -100,7 +149,7 @@ class MainActivity : AppCompatActivity() {
             "email" to "Incognito@Incognito"
         )
 
-        db.collection(NONSECURE_USERS).add(incognito)
+        db.collection(AUTH_USERS).add(incognito)
     }
 
     /**
@@ -112,7 +161,7 @@ class MainActivity : AppCompatActivity() {
     private fun readUsers(): List<User> {
         val users = mutableListOf<User>()
 
-        db.collection(NONSECURE_USERS).get()
+        db.collection(AUTH_USERS).get()
             .addOnSuccessListener { snapshot ->
 
                 for (document in snapshot) {
@@ -137,7 +186,7 @@ class MainActivity : AppCompatActivity() {
     private fun addCollectionOnChangeListener() {
 
         db
-            .collection(NONSECURE_USERS)
+            .collection(AUTH_USERS)
             .addSnapshotListener { snapshot, exception ->
 
                 if (exception != null) {
@@ -153,5 +202,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+    }
+
+    // Показать SnackBar
+    private fun showSnackBar(message: String, isAlert: Boolean = false) {
+
+        val bgColorId = if (isAlert) android.R.color.holo_red_dark else R.color.colorPrimary
+
+        Snackbar
+            .make(findViewById(R.id.cl_snackbar_container), message, Snackbar.LENGTH_SHORT)
+            .setTextColor(Color.WHITE)
+            .setBackgroundTint(ContextCompat.getColor(this, bgColorId))
+            .show()
     }
 }
